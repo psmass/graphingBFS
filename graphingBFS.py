@@ -52,16 +52,13 @@ class Node(object):
         self.lowestBwPipeToRoot = 999  # tracts smallest pipe upstream of us
 
     def printMyInfo(self):
-        if self.numHopsFromRoot == 999:
-            hops = "unknown"
-        else:
-            hops = self.numHopsFromRoot
+        hops = "unknown" if self.numHopsFromRoot == 999 else self.numHopsFromRoot
         valueToRootStr = "unknown" if self.valueToRoot == 999 else self.valueToRoot
+        bestBWStr = "n/a" if self.lowestBwPipeToRoot == 999 else self.lowestBwPipeToRoot
 
         print("Node: {} - Upstream node (toward root) is: {}, Hops from root: {}, Cost from root: {},"
               "lowest bandwidth pipe from root: {}, "
-              .format(self.name, self.upstreamNodeToRoot.name, hops, valueToRootStr,
-                      self.lowestBwPipeToRoot), end=" ")
+              .format(self.name, self.upstreamNodeToRoot.name, hops, valueToRootStr, bestBWStr), end=" ")
         self.printNodeAdjacencies()
 
     def printNodeAdjacencies(self):
